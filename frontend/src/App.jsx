@@ -1,44 +1,48 @@
 import { useEffect, useState } from 'react'
 import { getFirstMovies } from './utils/actions'
-import { ThemeProvider } from 'styled-components';
-import { lightTheme } from './theme/theme'
-import { Title } from './assets/styled-component/Title'
-import { CardMovie } from './assets/styled-component/CardMovie'
+import { CardMovie } from './assets/CardMovie'
+import './App.css'
+
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500'
 
 function App() {
   const [movies, setMovies] = useState([]);
+
   useEffect(() => {
     getMovie()
   }, [])
+
   const getMovie = async () => {
     try {
       const response = await getFirstMovies()
-      const { Search } = response
-      setMovies(Search)
+      const { results } = response
+      setMovies(results || [])
     } catch (error) {
       console.error(error);
     }
   }
 
   return (
-    <ThemeProvider theme={lightTheme}>
-      <Title>Hola</Title>
-      {
-        movies.map((movie) => {
-          const { Title, Poster, Type, Year, imdbID } = movie
+    <div className="app-container">
+      <h1 className="app-title">Hola</h1>
+      <div className="movies-grid">
+        {movies.map((movie) => {
+          const { title, poster_path, original_language, release_date, id } = movie
+          const posterUrl = poster_path ? `${IMAGE_BASE_URL}${poster_path}` : ''
+          const year = release_date ? release_date.split('-')[0] : 'N/A'
 
           return (
             <CardMovie
-              key={imdbID}
-              title={Title}
-              poster={Poster}
-              type={Type}
-              year={Year}
+              key={id}
+              title={title}
+              poster={posterUrl}
+              type={original_language}
+              year={year}
             />
           )
-        })
-      }
-    </ThemeProvider>
+        })}
+      </div>
+    </div>
   )
 };
 
