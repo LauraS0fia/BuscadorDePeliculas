@@ -8,6 +8,22 @@
   color: #3498db;
 }
 
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  font-size: 1rem;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-input:focus {
+  border-color: #2980b9;
+}
+
 .movies-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
