@@ -44,9 +44,11 @@ export const CardMovie = ({
             ) : null}
             <div className="card-movie-poster-container">
                 {poster ? <img className="card-movie-poster" src={poster} alt={altText} /> : <div className="card-movie-poster-placeholder">Sin imagen</div>}
+                <div className="card-movie-overlay" aria-hidden="true" />
             </div>
             <div className="card-movie-content">
                 <h2 className="card-movie-title">{title}</h2>
+                <div className="card-movie-subtle">{type} · {year}</div>
                 <div className="card-movie-meta">
                     <span className="card-movie-year">{year}</span>
                     <span className="card-movie-type">{type}</span>

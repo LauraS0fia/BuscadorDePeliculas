@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 html {
@@ -6,10 +7,14 @@ html {
 
 body {
 	margin: 0;
-	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	font-family: 'Be Vietnam Pro', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	--brand-blue-500: #2563eb;
+	--brand-blue-600: #1e40af;
+	--bg-900: #020617;
+	--bg-800: #0f172a;
 	background:
 		radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 30%),
-		linear-gradient(180deg, #020617 0%, #0f172a 100%);
+		linear-gradient(180deg, var(--bg-900) 0%, var(--bg-800) 100%);
 	color: #f8fafc;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -18,6 +23,30 @@ body {
 
 * {
 	box-sizing: border-box;
+}
+
+:root {
+	--glass-bg: rgba(15,23,42,0.46);
+	--glass-border: rgba(148,163,184,0.12);
+	--muted: #94a3b8;
+	--text: #e2e8f0;
+	--accent: rgba(96,165,250,0.45);
+}
+
+/* small utility classes used across the redesign */
+.glass-card {
+	background: linear-gradient(180deg, rgba(15,23,42,0.56), rgba(15,23,42,0.36));
+	border: 1px solid var(--glass-border);
+	backdrop-filter: blur(8px) saturate(110%);
+}
+
+.fade-in {
+	animation: fadeIn 420ms ease both;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
 }
 
 button,
