@@ -1,103 +1,302 @@
-.login-container {
+.auth-shell {
+    --auth-accent: #22d3ee;
+    --auth-accent-soft: rgba(34, 211, 238, 0.18);
+    --auth-edge: rgba(94, 234, 212, 0.32);
+    --auth-card: rgba(7, 18, 38, 0.78);
+    position: relative;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    display: grid;
+    place-items: center;
+    padding: clamp(1rem, 3vw, 2.2rem);
+    overflow: hidden;
+    isolation: isolate;
 }
 
-.login-card {
-    background: rgba(15, 23, 42, 0.82);
-    border: 1px solid rgba(148, 163, 184, 0.16);
-    border-radius: 20px;
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 18px 40px rgba(2, 6, 23, 0.35);
+.auth-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(45, 212, 191, 0.2), transparent 34%),
+        radial-gradient(circle at 90% 0%, rgba(14, 165, 233, 0.18), transparent 40%),
+        linear-gradient(135deg, #030712 0%, #0a1f3f 48%, #06243a 100%);
+    z-index: -3;
+}
+
+.auth-shell--register {
+    --auth-accent: #f59e0b;
+    --auth-accent-soft: rgba(245, 158, 11, 0.2);
+    --auth-edge: rgba(251, 191, 36, 0.3);
+}
+
+.auth-glow {
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+    filter: blur(2px);
+    z-index: -2;
+}
+
+.auth-glow--one {
+    width: min(35vw, 360px);
+    height: min(35vw, 360px);
+    right: -8%;
+    top: -7%;
+    background: radial-gradient(circle, var(--auth-accent-soft) 0%, rgba(15, 23, 42, 0) 68%);
+    animation: authFloatOne 9s ease-in-out infinite alternate;
+}
+
+.auth-glow--two {
+    width: min(42vw, 430px);
+    height: min(42vw, 430px);
+    left: -12%;
+    bottom: -18%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+    animation: authFloatTwo 12s ease-in-out infinite alternate;
+}
+
+.auth-card {
+    width: min(100%, 980px);
+    border-radius: 30px;
+    border: 1px solid var(--auth-edge);
+    background: linear-gradient(140deg, rgba(12, 20, 36, 0.86), var(--auth-card));
+    box-shadow:
+        0 30px 70px rgba(2, 6, 23, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    overflow: hidden;
+}
+
+.auth-showcase {
+    padding: clamp(2rem, 3.5vw, 3rem);
+    border-right: 1px solid rgba(148, 163, 184, 0.17);
+    background:
+        linear-gradient(175deg, rgba(2, 6, 23, 0.5) 0%, rgba(3, 105, 161, 0.14) 100%);
 }
 
 .login-kicker {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #60a5fa;
-    margin: 0 0 0.5rem;
+    color: var(--auth-accent);
+    margin: 0 0 0.9rem;
 }
 
 .login-title {
-    font-size: 2.5rem;
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    line-height: 0.95;
+    margin: 0;
     font-weight: 800;
-    margin: 0 0 0.4rem;
-    color: #f8fafc;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: #e0f2fe;
+}
+
+.auth-showcase-copy {
+    margin: 1.2rem 0 1.6rem;
+    color: #bfdbfe;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 28ch;
+}
+
+.auth-showcase-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.auth-showcase-list li {
+    position: relative;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    padding-left: 1.35rem;
+}
+
+.auth-showcase-list li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--auth-accent);
+    box-shadow: 0 0 14px var(--auth-accent-soft);
+    position: absolute;
+    left: 0;
+    top: 0.48rem;
+}
+
+.auth-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1.8rem, 3.2vw, 2.7rem);
 }
 
 .login-subtitle {
-    font-size: 0.95rem;
-    color: #94a3b8;
-    margin: 0 0 2rem;
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    margin: 0 0 1.4rem;
 }
 
 .login-error {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    color: #f87171;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    margin-bottom: 1.2rem;
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.42);
+    color: #fecaca;
+    padding: 0.68rem 0.92rem;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    margin-bottom: 1.05rem;
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
 }
 
 .login-field {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.46rem;
 }
 
 .login-label {
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     font-weight: 600;
-    color: #cbd5e1;
+    color: #dbeafe;
 }
 
 .login-input {
-    background: rgba(30, 41, 59, 0.8);
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    border-radius: 10px;
-    padding: 0.7rem 1rem;
-    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 12px;
+    padding: 0.78rem 0.95rem;
+    color: #eff6ff;
     font-size: 0.95rem;
-    transition: border-color 0.2s ease;
     outline: none;
-}
-
-.login-input:focus {
-    border-color: rgba(96, 165, 250, 0.6);
+    background: rgba(2, 6, 23, 0.52);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.2s ease;
 }
 
 .login-input::placeholder {
-    color: #475569;
+    color: #64748b;
+}
+
+.login-input:focus {
+    border-color: var(--auth-accent);
+    box-shadow: 0 0 0 4px var(--auth-accent-soft);
+    background: rgba(2, 6, 23, 0.72);
 }
 
 .login-button {
-    margin-top: 0.5rem;
-    background: #3b82f6;
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
+    margin-top: 0.4rem;
+    border: 0;
+    border-radius: 12px;
+    padding: 0.86rem;
+    color: #082f49;
+    font-size: 0.98rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s ease;
+    background: linear-gradient(145deg, #67e8f9 0%, var(--auth-accent) 100%);
+    box-shadow: 0 10px 24px rgba(8, 47, 73, 0.34);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.auth-shell--register .login-button {
+    color: #451a03;
+    background: linear-gradient(145deg, #fcd34d 0%, var(--auth-accent) 100%);
 }
 
 .login-button:hover {
-    background: #2563eb;
+    transform: translateY(-1px);
+    filter: saturate(110%);
+    box-shadow: 0 14px 26px rgba(8, 47, 73, 0.42);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-link {
+    margin: 1.1rem 0 0;
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.login-link-button {
+    border: 0;
+    background: transparent;
+    color: #e0f2fe;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    font-weight: 600;
+    padding: 0;
+    cursor: pointer;
+}
+
+.auth-shell--register .login-link-button {
+    color: #fef3c7;
+}
+
+@media (max-width: 860px) {
+    .auth-card {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-showcase {
+        border-right: 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.17);
+    }
+
+    .auth-showcase-copy {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 560px) {
+    .auth-shell {
+        padding: 0.7rem;
+    }
+
+    .auth-card {
+        border-radius: 20px;
+    }
+
+    .auth-showcase,
+    .auth-content {
+        padding: 1.2rem;
+    }
+
+    .login-title {
+        font-size: 2.2rem;
+    }
+
+    .auth-showcase-list {
+        gap: 0.65rem;
+    }
+}
+
+@keyframes authFloatOne {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(-26px, 16px) scale(1.08);
+    }
+}
+
+@keyframes authFloatTwo {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(28px, -14px) scale(1.06);
+    }
 }
