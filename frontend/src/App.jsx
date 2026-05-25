@@ -4,7 +4,6 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { MoviesPage } from './pages/MoviesPage'
-//import './App.css'
 
 function AppRoutes() {
   return (
